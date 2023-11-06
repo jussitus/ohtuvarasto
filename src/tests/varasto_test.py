@@ -7,6 +7,7 @@ class TestVarasto(unittest.TestCase):
         self.varasto = Varasto(10)
         self.varasto_neg = Varasto(-1, -1)
         self.varasto_yli = Varasto(10, 11)
+
     def test_konstruktori_luo_tyhjan_varaston(self):
         # https://docs.python.org/3/library/unittest.html#unittest.TestCase.assertAlmostEqual
         self.assertAlmostEqual(self.varasto.saldo, 0)
@@ -57,12 +58,12 @@ class TestVarasto(unittest.TestCase):
     def test_lisays_saldo_ei_ylita_tilavuutta(self):
         self.varasto.lisaa_varastoon(self.varasto.tilavuus + 1)
         self.assertAlmostEqual(self.varasto.saldo, self.varasto.tilavuus)
-    
+
     def test_ottaminen_neg_maaran_ottaminen_ei_muuta_saldoa(self):
         saldo_ennen = self.varasto.saldo
         self.varasto.ota_varastosta(-1)
         self.assertAlmostEqual(self.varasto.saldo, saldo_ennen)
-    
+
     def test_ottaminen_neg_maaran_ottaminen_palauttaa_nollan(self):
         otto = self.varasto.ota_varastosta(-1)
         self.assertAlmostEqual(otto, 0)
@@ -78,4 +79,7 @@ class TestVarasto(unittest.TestCase):
 
     def test_str_metodi_palauttaa_oikean_merkkijonon(self):
         merkkijono = str(self.varasto)
-        self.assertEqual(merkkijono, f"saldo = {self.varasto.saldo}, vielä tilaa {self.varasto.paljonko_mahtuu()}")
+        self.assertEqual(
+            merkkijono,
+            f"saldo = {self.varasto.saldo}, vielä tilaa {self.varasto.paljonko_mahtuu()}",
+        )
